@@ -1,0 +1,20 @@
+@echo OFF
+cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
+
+echo: > "%temp%\EV3Batch.bat"
+echo @echo OFF >> "%temp%\EV3Batch.bat"
+echo cls >> "%temp%\EV3Batch.bat"
+echo: >> "%temp%\EV3Batch.bat" 
+echo echo Baixando EV3 Classroom... >> "%temp%\EV3Batch.bat"
+echo curl "https://education.lego.com/_/downloads/EV3_Classroom_Windows_1.5.3_Global.msi" -s -o "%userprofile%\Downloads\EV3_Classroom_Windows.msi" >> "%temp%\EV3Batch.bat"
+echo: >> "%temp%\EV3Batch.bat"
+echo echo Instalando EV3 Classroom... >> "%temp%\EV3Batch.bat"
+echo msiexec /package "%userprofile%\Downloads\EV3_Classroom_Windows.msi" /passive >> "%temp%\EV3Batch.bat"
+echo: >> "%temp%\EV3Batch.bat"
+echo echo Baixando EV3 G... >> "%temp%\EV3Batch.bat"
+echo curl "https://education.lego.com/_/downloads/LME-EV3_Full-setup_1.4.5_pt-BR_WIN32.exe" -s -o "%userprofile%\Downloads\LME-EV3_Full-setup_1.4.5_pt-BR_WIN32.exe" >> "%temp%\EV3Batch.bat"
+echo: >> "%temp%\EV3Batch.bat"
+echo Instalando EV3 G... >> "%temp%\EV3Batch.bat"
+echo %userprofile%\Downloads\LME-EV3_Full-setup_1.4.5_pt-BR_WIN32.exe /qb /acceptlicenses yes >> "%temp%\EV3Batch.bat"
+echo exit >> "%temp%\EV3Batch.bat"
+"%temp%\EV3Batch.bat"
